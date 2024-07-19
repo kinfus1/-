@@ -1,0 +1,26 @@
+
+const int N=1000010; 
+int q[N],tem[N]
+void merge_sort(int q[], int l, int r)
+{
+    if (l >= r) return;
+
+    int mid = l + r >> 1;                                    //1 取中心点做分界点
+    merge_sort(q, l, mid);                                   //2  将左右两段分别排序
+    merge_sort(q, mid + 1, r);
+
+    int k = 0, i = l, j = mid + 1;
+    while (i <= mid && j <= r)                               //3 将两段中最小的数字放入tmp 中
+        if (q[i] <= q[j]) tmp[k ++ ] = q[i ++ ];
+        else tmp[k ++ ] = q[j ++ ];
+
+    while (i <= mid) tmp[k ++ ] = q[i ++ ];                  // 若有一段已经放完，则将另一段全部放入  
+    while (j <= r) tmp[k ++ ] = q[j ++ ];                    
+
+    for (i = l, j = 0; i <= r; i ++, j ++ ) q[i] = tmp[j];   //将tmp 放入q 中
+}
+
+作者：yxc
+链接：https://www.acwing.com/blog/content/277/
+来源：AcWing
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
